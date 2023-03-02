@@ -22,6 +22,7 @@ const Home: NextPage = () => {
         </h1>
         <TelegramLoginButton
         botName="TonicLoungeBot"
+        usePic={true}
         dataOnauth={(user: TelegramUser) => console.log(user)}
       />
         <p className={styles.description}>

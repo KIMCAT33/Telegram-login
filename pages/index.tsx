@@ -2,12 +2,33 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import {useState, useEffect} from 'react'
-import styles from '../styles/Home.module.css'
-import TelegramLoginButton, { TelegramUser } from 'telegram-login-button'
+import styles from '../styles/Home.module.css';
+import TelegramLoginButton, { TelegramUser } from 'telegram-login-button';
+import { Bot, InlineKeyboard } from "grammy";
 
 const Home: NextPage = () => {
 
   const [login, setLogin] = useState(false);
+  
+  const bot = new Bot("5527167347:AAFg51t0sd4lTYYLJndy7C1XhgKEdj4YoiE");
+  // bot reply user button with link
+  const sendLinkButton = () => {
+    //Pre-assign menu text
+    const firstMenu = "<b>Menu 1</b>\n\nA beautiful menu with a shiny inline button.";
+    const secondMenu = "<b>Menu 2</b>\n\nA better menu with even more shiny inline buttons.";
+    //Pre-assign button text
+    const nextButton = "Next";
+    const backButton = "Back";
+    //Build keyboards
+    const firstMenuMarkup = new InlineKeyboard().text(nextButton, backButton);
+    //This handler sends a menu with the inline buttons we pre-assigned above
+      bot.command("menu", async (ctx: any) => {
+        await ctx.reply(firstMenu, {
+          parse_mode: "HTML",
+          reply_markup: firstMenuMarkup,
+        });
+    })
+  };
 
   return (
     <div className={styles.container}>
@@ -28,7 +49,7 @@ const Home: NextPage = () => {
         dataOnauth={(user: TelegramUser) => {setLogin(true); console.log(user)}}
       />}
        
-
+        <button onClick={sendLinkButton}>Send Link</button>
         <p className={styles.description}>
           Get started by editing{' '}
           <code className={styles.code}>pages/index.tsx</code>

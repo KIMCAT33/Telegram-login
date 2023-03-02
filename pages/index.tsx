@@ -28,6 +28,7 @@ const Home: NextPage = () => {
           reply_markup: firstMenuMarkup,
         });
     })
+    bot.start();
   };
 
   return (

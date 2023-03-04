@@ -32,7 +32,7 @@ const Home: NextPage = () => {
   console.log("user.id", user?.id)
 
   const sendLoungeMessage = async (spaceTitle: string) => {
-    const url = "http://ec2-3-37-70-35.ap-northeast-2.compute.amazonaws.com:3000/bot"
+    const url = "https://ec2-3-37-70-35.ap-northeast-2.compute.amazonaws.com:3000/bot"
     fetch(url, {
       method: "POST",
       headers: {
@@ -40,7 +40,7 @@ const Home: NextPage = () => {
         },
         body: JSON.stringify({
           link: spaceTitle,
-          id: user?.id,
+          id: 1814305660,
         })
       })
       .then((res) => {res.json(); console.log(res); })      

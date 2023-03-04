@@ -11,13 +11,29 @@ const Home: NextPage = () => {
   let screaming = false;
 
   const [login, setLogin] = useState(false);
+  const [user, setUser] = useState({});
 
   const bot = new Bot("5527167347:AAFg51t0sd4lTYYLJndy7C1XhgKEdj4YoiE");
   // bot reply user button with link
   const sendLinkButton = () => {
-    bot.on("message", (ctx) => ctx.reply("Hi there!"));
-    bot.start();
+    bot.on("message", (ctx: any) => ctx.reply("Hi there!"));
+  
   };
+
+  const sendLoungeMessage = async (spaceTitle: string) => {
+    const url = "ec2-3-37-70-35.ap-northeast-2.compute.amazonaws.com:3000"
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          link: spaceTitle,
+          id: user?.id,
+        })
+      })
+      .then((res) => res.json())      
+  }
 
   return (
     <div className={styles.container}>
@@ -32,7 +48,12 @@ const Home: NextPage = () => {
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
         {login ? (
+          <>
           <h1>Logged in</h1>
+          <button onClick={() => sendLoungeMessage("tonicspace")}>tonicspace</button>
+          <button onClick={() => sendLoungeMessage("toniclounge")}>toniclounge</button>
+
+          </>
         ) : (
           <TelegramLoginButton
             botName="TonicLoungeBot"

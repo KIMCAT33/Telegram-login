@@ -6,12 +6,22 @@ import styles from "../styles/Home.module.css";
 import TelegramLoginButton, { TelegramUser } from "telegram-login-button";
 import { Bot, InlineKeyboard } from "grammy";
 
+interface User {
+  id: number;
+  first_name: string;
+  last_name: string;
+  username: string;
+  photo_url: string;
+  auth_date: number;
+  hash: string;
+}
+
 const Home: NextPage = () => {
   //Store bot screaming status
   let screaming = false;
 
   const [login, setLogin] = useState(false);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState<User>();
 
   const bot = new Bot("5527167347:AAFg51t0sd4lTYYLJndy7C1XhgKEdj4YoiE");
   // bot reply user button with link

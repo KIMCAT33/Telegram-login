@@ -29,9 +29,10 @@ const Home: NextPage = () => {
     bot.on("message", (ctx: any) => ctx.reply("Hi there!"));
   
   };
+  console.log("user.id", user?.id)
 
   const sendLoungeMessage = async (spaceTitle: string) => {
-    const url = "ec2-3-37-70-35.ap-northeast-2.compute.amazonaws.com:3000"
+    const url = "http://ec2-3-37-70-35.ap-northeast-2.compute.amazonaws.com:3000/bot"
     fetch(url, {
       method: "POST",
       headers: {
@@ -42,7 +43,7 @@ const Home: NextPage = () => {
           id: user?.id,
         })
       })
-      .then((res) => res.json())      
+      .then((res) => {res.json(); console.log(res); })      
   }
 
   return (
@@ -65,6 +66,7 @@ const Home: NextPage = () => {
 
           </>
         ) : (
+          <>
           <TelegramLoginButton
             botName="TonicLoungeBot"
             usePic={true}
@@ -73,6 +75,9 @@ const Home: NextPage = () => {
               console.log(user);
             }}
           />
+          <button onClick={() => sendLoungeMessage("tonicspace")}>tonicspace</button>
+          <button onClick={() => sendLoungeMessage("toniclounge")}>toniclounge</button>
+          </>
         )}
 
         <button onClick={sendLinkButton}>Send Link</button>

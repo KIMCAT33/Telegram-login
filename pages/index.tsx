@@ -75,8 +75,6 @@ const Home: NextPage = () => {
               console.log(user);
             }}
           />
-          <button onClick={() => sendLoungeMessage("tonicspace")}>tonicspace</button>
-          <button onClick={() => sendLoungeMessage("toniclounge")}>toniclounge</button>
           </>
         )}
 
